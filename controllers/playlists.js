@@ -66,11 +66,11 @@ playlistsRouter.delete("/:id", async (request, response) => {
 });
 
 playlistsRouter.put("/:id", async (request, response) => {
-  const { name } = request.body;
+  // const { name } = request.body;
   // This code only handles the name parameter, not the other parameters
   const updatedPlaylist = await Playlist.findByIdAndUpdate(
     request.params.id,
-    { name },
+    request.body, // we add the whole request.body for update
     { new: true, runValidators: true }
   );
   response.json(updatedPlaylist);
